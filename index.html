@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#121214">
+  <title>Vox Messenger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark" data-style="modern" data-age-group="teen">
+
+  <!-- Регистрация -->
+  <section id="auth-screen" class="screen active">
+    <form class="auth-card" id="register-form">
+      <div class="brand-logo">✦ Vox</div>
+      <h1>Добро пожаловать!</h1>
+      <p>Создай профиль и начни своё приключение.</p>
+
+      <div class="field-group">
+        <label for="reg-name">Твоё имя</label>
+        <input id="reg-name" type="text" placeholder="Например, Алекс" maxlength="30" required>
+      </div>
+
+      <div class="field-group">
+        <label for="reg-username">Имя пользователя</label>
+        <input id="reg-username" type="text" placeholder="@username" maxlength="25" required>
+      </div>
+
+      <div class="field-group">
+        <label for="reg-password">Пароль</label>
+        <input id="reg-password" type="password" placeholder="Придумай пароль" minlength="6" required>
+      </div>
+
+      <div class="field-group">
+        <label for="reg-age">Возрастная категория</label>
+        <select id="reg-age" required>
+          <option value="child">Ребёнок</option>
+          <option value="teen" selected>Подросток</option>
+          <option value="adult">Взрослый</option>
+        </select>
+      </div>
+
+      <button class="btn-primary" type="submit">Создать профиль →</button>
+      <p class="form-note">Демонстрационный проект. Регистрация пока не отправляет данные на сервер.</p>
+    </form>
+  </section>
+
+  <!-- Приложение -->
+  <section id="app-screen" class="screen">
+    <aside class="sidebar">
+      <div class="brand-logo">✦ Vox</div>
+
+      <div class="profile-block">
+        <label for="avatar-upload" class="avatar-container" id="user-avatar-frame" title="Изменить аватар">
+          <img id="user-avatar" src="https://placehold.co/120x120/302050/ffffff?text=V" alt="Аватар">
+          <span class="avatar-edit-icon">📷</span>
+        </label>
+        <input type="file" id="avatar-upload" accept="image/*" hidden>
+
+        <strong id="display-name">Пользователь</strong>
+        <span class="muted" id="display-username">@username</span>
+        <span class="badge" id="display-age-badge">Подросток</span>
+      </div>
+
+      <nav class="menu" aria-label="Основное меню">
+        <button class="nav-btn active" type="button" data-tab="chats">💬 <span>Чаты</span></button>
+        <button class="nav-btn" type="button" data-tab="stories">📸 <span>Истории</span></button>
+        <button class="nav-btn" type="button" data-tab="friends">👥 <span>Друзья</span></button>
+        <button class="nav-btn" type="button" data-tab="mascot">🦊 <span>Маскот</span></button>
+        <button class="nav-btn" type="button" data-tab="quests">🏆 <span>Квесты</span></button>
+        <button class="nav-btn" type="button" data-tab="chests">🎁 <span>Сундуки</span></button>
+        <button class="nav-btn" type="button" data-tab="settings">⚙️ <span>Настройки</span></button>
+        <button class="nav-btn" type="button" data-tab="support">💜 <span>Поддержка</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="coin-display">🪙 <span id="coin-balance">0</span> монет</div>
+        <button class="theme-toggle" id="toggle-theme-btn" type="button">☀️ Светлая тема</button>
+      </div>
+    </aside>
+
+    <main class="content-area">
+      <header class="topbar">
+        <div>
+          <h1 id="page-title">Чаты</h1>
+          <p class="muted">Твоё пространство для общения</p>
+        </div>
+        <div class="online-status"><span class="status-dot"></span> Vox работает</div>
+      </header>
+
+      <!-- Чаты -->
+      <section id="tab-chats" class="tab-content active">
+        <div class="chat-top-bar">
+          <div class="field-group compact">
+            <label for="chat-age-select">Режим интерфейса</label>
+            <select id="chat-age-select">
+              <option value="child">Ребёнок</option>
+              <option value="teen" selected>Подросток</option>
+              <option value="adult">Взрослый</option>
+            </select>
+          </div>
+          <div class="hint-banner" id="age-hint-banner">
+            <span>⚡ Выполняй квесты и настраивай маскота!</span>
+          </div>
+        </div>
+
+        <div class="chat-layout">
+          <div class="chat-list panel">
+            <div class="panel-heading">
+              <h2>Сообщения</h2>
+              <button class="icon-btn" id="new-chat-btn" type="button" title="Новый чат" aria-label="Новый чат">＋</button>
+            </div>
+
+            <button class="chat-item active" type="button" data-chat-id="alex" data-chat-name="Алекс">
+              <span class="chat-avatar">🦊</span>
+              <span class="chat-item-text">
+                <strong>Алекс</strong>
+                <small>Пойдём выполнять квест?</small>
+              </span>
+              <span class="online-dot" aria-label="В сети"></span>
+            </button>
+
+            <button class="chat-item" type="button" data-chat-id="mira" data-chat-name="Мира">
+              <span class="chat-avatar">🐱</span>
+              <span class="chat-item-text">
+                <strong>Мира</strong>
+                <small>Классная история!</small>
+              </span>
+            </button>
+
+            <button class="chat-item" type="button" data-chat-id="team" data-chat-name="Команда Vox">
+              <span class="chat-avatar">🌟</span>
+              <span class="chat-item-text">
+                <strong>Команда Vox</strong>
+                <small>Добро пожаловать!</small>
+              </span>
+            </button>
+
+            <div class="chat-section-label">Твои маскоты</div>
+
+            <button class="chat-item mascot-chat-item" type="button" data-chat-id="mascot-robot" data-chat-name="Робот">
+              <span class="chat-avatar">🤖</span>
+              <span class="chat-item-text">
+                <strong>Робот</strong>
+                <small>Всегда на связи ⚡</small>
+              </span>
+              <span class="online-dot" aria-label="В сети"></span>
+            </button>
+
+            <button class="chat-item mascot-chat-item" type="button" data-chat-id="mascot-wolf" data-chat-name="Волк">
+              <span class="chat-avatar">🐺</span>
+              <span class="chat-item-text">
+                <strong>Волк</strong>
+                <small>Готов к новым целям</small>
+              </span>
+              <span class="online-dot" aria-label="В сети"></span>
+            </button>
+
+            <button class="chat-item mascot-chat-item" type="button" data-chat-id="mascot-fox" data-chat-name="Лиса">
+              <span class="chat-avatar">🦊</span>
+              <span class="chat-item-text">
+                <strong>Лиса</strong>
+                <small>Есть хитрый план 😉</small>
+              </span>
+              <span class="online-dot" aria-label="В сети"></span>
+            </button>
+
+            <button class="chat-item mascot-chat-item" type="button" data-chat-id="mascot-rabbit" data-chat-name="Заяц">
+              <span class="chat-avatar">🐰</span>
+              <span class="chat-item-text">
+                <strong>Заяц</strong>
+                <small>Заряжен на веселье!</small>
+              </span>
+              <span class="online-dot" aria-label="В сети"></span>
+            </button>
+          </div>
+
+          <div class="chat-window panel">
+            <div class="messages-header">
+              <div class="chat-peer">
+                <div class="chat-peer-details">
+                  <strong id="current-chat-name">Алекс</strong>
+                  <small class="muted" id="current-chat-status">Демонстрационный чат</small>
+                </div>
+              </div>
+              <span aria-hidden="true">⋯</span>
+            </div>
+
+            <div class="messages-list" id="messages-list" aria-live="polite">
+              <div class="message incoming">Привет! Добро пожаловать в Vox 👋</div>
+              <div class="message incoming">Уже выбрал своего маскота?</div>
+            </div>
+
+            <form class="message-input" id="chat-send-form">
+              <input
+                id="chat-input-text"
+                type="text"
+                placeholder="Написать сообщение..."
+                maxlength="1000"
+                autocomplete="off"
+                required
+              >
+              <button class="btn-primary send-btn" type="submit" aria-label="Отправить">➤</button>
+            </form>
+          </div>
+        </div>
+
+        <p class="muted small-note">С маскотами можно общаться прямо здесь — они отвечают в своём стиле. Чаты людей работают в демо-режиме.</p>
+      </section>
+
+      <!-- Истории -->
+      <section id="tab-stories" class="tab-content">
+        <div class="section-intro">
+          <h2>📸 Истории</h2>
+          <p class="muted">Выбирай фотографию, добавляй подпись и публикуй историю.</p>
+        </div>
+
+        <div class="story-editor panel">
+          <h3>Создать историю</h3>
+
+          <label class="upload-box" for="story-image">
+            <span class="upload-icon">＋</span>
+            <strong>Выбрать фотографию</strong>
+            <small>Нажми здесь, чтобы выбрать изображение на устройстве</small>
+          </label>
+          <input type="file" id="story-image" accept="image/*" hidden>
+
+          <div class="story-preview" id="story-preview">
+            <span class="muted">Предпросмотр появится здесь</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="story-filter">Фильтр фотографии</label>
+              <select id="story-filter">
+                <option value="none">Оригинал</option>
+                <option value="grayscale(1)">Чёрно-белый</option>
+                <option value="sepia(.7)">Ретро</option>
+                <option value="brightness(1.2)">Яркий</option>
+                <option value="saturate(1.8)">Насыщенный</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="story-text">Подпись к истории</label>
+              <textarea id="story-text" maxlength="500" placeholder="Расскажи, как проходит твой день..."></textarea>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button type="button" class="btn-secondary" id="clear-story-btn">Очистить</button>
+            <button type="button" class="btn-primary" id="post-story-btn">Опубликовать историю</button>
+          </div>
+
+          <p class="muted small-note">Истории хранятся только в этом браузере и не отправляются другим пользователям.</p>
+        </div>
+
+        <h3 class="feed-title">Мои истории</h3>
+        <div id="stories-feed" class="stories-feed"></div>
+      </section>
+
+      <!-- Маскот -->
+      <section id="tab-mascot" class="tab-content">
+        <div class="section-intro">
+          <h2>🦊 Мой маскот</h2>
+          <p class="muted">Четыре героя в едином фиолетово-космическом стиле. Выбирай своего и настраивай образ.</p>
+        </div>
+
+        <div class="two-column">
+          <div class="panel mascot-card">
+            <div class="mascot-display" id="mascot-display">
+              <img class="mascot-art" src="images/mascot-robot.png" alt="Маскот Робот">
+            </div>
+            <h3 id="mascot-name">Робот</h3>
+            <p class="muted mascot-description" id="mascot-description">Умный и надёжный помощник. Всегда рядом, чтобы помочь!</p>
+            <p class="mascot-tagline" id="mascot-tagline">«Вместе мы сильнее!»</p>
+            <div class="mascot-palette" id="mascot-palette" aria-label="Цветовая палитра маскота"></div>
+            <div class="mascot-role" id="mascot-style-note">Белое худи с синими деталями, наушники и кроссовки</div>
+          </div>
+
+          <div class="panel settings-card">
+            <h3>Внешность</h3>
+
+            <div class="field-group">
+              <label for="mascot-skin-select">Выбери маскота</label>
+              <select id="mascot-skin-select">
+                <option value="robot">🤖 Робот</option>
+                <option value="wolf">🐺 Волк</option>
+                <option value="fox">🦊 Лиса</option>
+                <option value="rabbit">🐰 Заяц</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label">Цвет одежды</span>
+              <div id="mascot-color-options" class="mascot-color-options" role="group" aria-label="Цвет одежды маскота"></div>
+              <label class="mascot-custom-color" for="mascot-color-input">
+                <span>Свой цвет</span>
+                <input id="mascot-color-input" type="color" value="#8755ff" aria-label="Выбрать свой цвет одежды">
+              </label>
+            </div>
+
+            <div class="mascot-tip">💡 Выбери цвет — он применится к одежде маскота. У каждого героя свой сохранённый цвет.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Квесты -->
+      <section id="tab-quests" class="tab-content">
+        <div class="section-intro">
+          <h2>🏆 Квесты</h2>
+          <p class="muted">Челленджи на общение, творчество и секреты интерфейса — закрывай задания и лутай монеты.</p>
+        </div>
+
+        <div class="quest-banner">
+          <div>
+            <span class="eyebrow">ТВОЯ АКТИВНОСТЬ</span>
+            <h3>Каждый день — новое приключение</h3>
+            <p>За действия — монеты, за монеты — сундуки и новые образы.</p>
+          </div>
+          <span class="banner-icon">⚡</span>
+        </div>
+
+        <div class="quest-list" id="quest-list" aria-live="polite"></div>
+
+        <p class="muted small-note">Чаты и список друзей в демо не подключены к другим людям: задания засчитывают действия внутри этого браузера. Награды учебные и не имеют денежной стоимости.</p>
+      </section>
+
+      <!-- Сундуки -->
+      <section id="tab-chests" class="tab-content">
+        <div class="section-intro">
+          <h2>🎁 Сундуки</h2>
+          <p class="muted">Потрать монеты и посмотри, какая награда тебе достанется.</p>
+        </div>
+
+        <div class="chest-balance panel">
+          Твой баланс: <strong>🪙 <span id="chest-coin-balance">0</span></strong>
+        </div>
+
+        <div class="chests-grid">
+          <article class="chest-card panel">
+            <div class="chest-icon">📦</div>
+            <span class="rarity common">ОБЫЧНЫЙ</span>
+            <h3>Деревянный сундук</h3>
+            <p class="muted">Небольшой сюрприз</p>
+            <div class="chest-price">20 🪙</div>
+            <button class="btn-primary" type="button" data-chest-cost="20" data-chest-name="Деревянный сундук">Открыть</button>
+          </article>
+
+          <article class="chest-card panel">
+            <div class="chest-icon">🎁</div>
+            <span class="rarity rare">РЕДКИЙ</span>
+            <h3>Сундук приключений</h3>
+            <p class="muted">Больше шансов на бонус</p>
+            <div class="chest-price">50 🪙</div>
+            <button class="btn-primary" type="button" data-chest-cost="50" data-chest-name="Сундук приключений">Открыть</button>
+          </article>
+
+          <article class="chest-card panel">
+            <div class="chest-icon">💎</div>
+            <span class="rarity epic">ЭПИЧЕСКИЙ</span>
+            <h3>Кристальный сундук</h3>
+            <p class="muted">Особенная награда</p>
+            <div class="chest-price">100 🪙</div>
+            <button class="btn-primary" type="button" data-chest-cost="100" data-chest-name="Кристальный сундук">Открыть</button>
+          </article>
+
+          <article class="chest-card panel">
+            <div class="chest-icon">👑</div>
+            <span class="rarity legendary">ЛЕГЕНДАРНЫЙ</span>
+            <h3>Королевский сундук</h3>
+            <p class="muted">Самый редкий сюрприз</p>
+            <div class="chest-price">200 🪙</div>
+            <button class="btn-primary" type="button" data-chest-cost="200" data-chest-name="Королевский сундук">Открыть</button>
+          </article>
+        </div>
+
+        <div class="chest-result panel" id="chest-result" role="status">Здесь появится твоя награда.</div>
+        <h3 class="feed-title">История наград</h3>
+        <div id="chest-history" class="chest-history"></div>
+
+        <div class="chest-opening-modal" id="chest-opening-modal" hidden>
+          <div class="chest-modal-backdrop"></div>
+          <div class="chest-modal-card panel" role="dialog" aria-modal="true" aria-labelledby="chest-modal-title">
+            <div class="chest-animation-stage" id="chest-animation-stage" aria-hidden="true">
+              <div class="chest-aura"></div>
+              <div class="chest-rays">✦　✧　✦　✧　✦</div>
+              <div class="animated-chest">
+                <span class="animated-chest-lid"></span>
+                <span class="animated-chest-base"><span class="animated-chest-lock">✦</span></span>
+              </div>
+              <div class="chest-flying-reward" id="chest-flying-reward">🪙</div>
+            </div>
+            <div class="chest-reward-reveal" id="chest-reward-reveal" hidden>
+              <span class="eyebrow">НАГРАДА ОТКРЫТА</span>
+              <h2 id="chest-modal-title">Ты получил награду!</h2>
+              <p class="chest-reward-name" id="chest-reward-name"></p>
+              <div class="chest-modal-actions">
+                <button class="btn-primary" type="button" id="chest-claim-btn">Забрать</button>
+                <button class="btn-secondary" type="button" id="chest-open-another-btn">Открыть ещё</button>
+              </div>
+            </div>
+            <span class="sr-only" id="chest-opening-status" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Настройки -->
+      <section id="tab-settings" class="tab-content">
+        <div class="section-intro">
+          <h2>⚙️ Настройки</h2>
+          <p class="muted">Настрой Vox под себя.</p>
+        </div>
+
+        <div class="panel settings-card">
+          <div class="setting-row">
+            <div>
+              <strong>Оформление</strong>
+              <p class="muted">Светлый или тёмный интерфейс</p>
+            </div>
+            <button class="btn-secondary" id="settings-theme-btn" type="button">Сменить тему</button>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>Стиль интерфейса</strong>
+              <p class="muted">Выбери внешний вид</p>
+            </div>
+            <select id="style-select">
+              <option value="modern">Современный</option>
+              <option value="neon">Неоновый</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>Рамка аватарки</strong>
+              <p class="muted">Укрась свой профиль</p>
+            </div>
+            <select id="frame-select">
+              <option value="frame-none">Без рамки</option>
+              <option value="frame-gold">Золотая</option>
+              <option value="frame-neon">Неоновая</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>Возрастной режим</strong>
+              <p class="muted">Подсказки и оформление</p>
+            </div>
+            <select id="settings-age-select">
+              <option value="child">Ребёнок</option>
+              <option value="teen">Подросток</option>
+              <option value="adult">Взрослый</option>
+            </select>
+          </div>
+
+          <button class="btn-secondary" id="reset-settings-btn" type="button">Сбросить настройки</button>
+        </div>
+      </section>
+
+      <!-- Друзья -->
+      <section id="tab-friends" class="tab-content">
+        <div class="section-intro">
+          <h2>👥 Друзья</h2>
+          <p class="muted">Добавляй друзей по имени или имени пользователя. В демоверсии список хранится в этом браузере.</p>
+        </div>
+
+        <form id="add-friend-form" class="panel friends-add-form">
+          <div class="field-group">
+            <label for="friend-name-input">Имя или @username друга</label>
+            <input id="friend-name-input" type="text" maxlength="40" placeholder="Например, @alex или Алекс" autocomplete="off" required>
+          </div>
+          <button class="btn-primary" type="submit">＋ Добавить друга</button>
+        </form>
+
+        <div class="panel friends-list-panel">
+          <div class="panel-heading">
+            <h3>Мои друзья</h3>
+            <span class="muted" id="friends-count">0 друзей</span>
+          </div>
+          <div id="friends-list" class="friends-list" aria-live="polite">
+            <p class="muted friends-empty">Пока здесь никого нет. Добавь первого друга!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Поддержка -->
+      <section id="tab-support" class="tab-content">
+        <div class="section-intro">
+          <h2>💜 Поддержка</h2>
+          <p class="muted">Опиши вопрос или проблему.</p>
+        </div>
+
+        <form id="support-form" class="panel support-form">
+          <div class="field-group">
+            <label for="support-topic">Тема обращения</label>
+            <input id="support-topic" type="text" placeholder="Например, проблема с профилем" required maxlength="100">
+          </div>
+
+          <div class="field-group">
+            <label for="support-description">Описание</label>
+            <textarea id="support-description" placeholder="Опиши, что произошло..." required maxlength="1000"></textarea>
+          </div>
+
+          <button class="btn-primary" type="submit">Подготовить обращение</button>
+          <p class="muted small-note">Демо-форма не отправляет данные в интернет.</p>
+        </form>
+      </section>
+
+      <footer class="app-footer">
+        ✦ Vox Messenger
+        <span>Демонстрационный проект</span>
+      </footer>
+    </main>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
